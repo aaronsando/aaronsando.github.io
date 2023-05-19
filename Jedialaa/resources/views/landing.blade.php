@@ -10,7 +10,7 @@
 <body>
 
     <!-- Section: Design Block -->
-<section class="background-radial-gradient overflow-hidden" style="background-color: #7A8ED8;">
+<section class="background-radial-gradient overflow-hidden" style="background-color: #7A8ED8; min-height: 100vh;">
     
   
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
