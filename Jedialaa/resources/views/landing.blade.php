@@ -37,7 +37,7 @@
             <div class="card-body px-4 py-5 px-md-5">
 
                 <div style="display: flex ; justify-content: center; align-items: center; ">
-                    <img src="asset{{ 'images/Logo.png' }}" width="120" >
+                    <img src="{{ asset ('images/Logo.png') }}" width="120" >
                     <h2 style="color: #7A8ED8; font-family: Cambria;">Join With Us</h2>
                 </div>
 

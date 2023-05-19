@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Validator;
+use Auth;
 
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +36,7 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +44,7 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +52,7 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,8 +60,17 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(string $id)
     {
         //
+    }
+
+    public function logout(Request $request) 
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

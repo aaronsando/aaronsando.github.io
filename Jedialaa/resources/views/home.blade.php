@@ -47,6 +47,8 @@
       text-align: center;
     }
   </style>
+
+
 </head>
   <body style="background-color: white;">
     <div class="navbar">
@@ -54,9 +56,16 @@
         <img src="{{ 'images/Logo.png' }}" alt="Logo">
       </a>
       <h1 class="title">JEDIALAA</h1>
-      <input class="profile-button"type="image" src="{{ asset('images/user.png') }}" >   
+
+      <form action="{{ url('/logout') }}" method="POST">
+        @csrf
+        <button type="submit">Cerrar sesión</button>
+      </form>
+
+      {{-- <input class="profile-button" type="image" src="{{ asset('images/user.png') }}" >    --}}
     </div>
 
+    <h3 style="text-align: left; padding-left: 8%; padding-top: 2% ; font-family: Cambria; ">Bienvenido, {{ Auth::User()->name }} </h3>
     <h2 style="text-align: left; padding-left: 8%; padding-top: 2% ; font-family: Cambria; ">Your files: </h2>
     
     <div class="card-grid">

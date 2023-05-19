@@ -23,8 +23,12 @@
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
 
-                  <form>
 
+
+
+                  <form action="{{ url('login/') }}" method="post">
+                    @csrf
+                    
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <span class="h1 fw-bold mb-0" style="color: #7A8ED8; font-family: Cambria;">Log In Jedialaa</span>
                     </div>
@@ -33,23 +37,26 @@
 
                     <div class="form-outline mb-4">
                       <label class="form-label" style="font-family: Cambria;">Email address</label>
-                      <input type="email" id="form2Example17" class="form-control form-control-lg" placeholder="example@email.com" />
+                      <input type="email" name="email" id="form2Example17" class="form-control form-control-lg" placeholder="example@email.com" />
                     </div>
 
                     <div class="form-outline mb-4">
                       <label class="form-label" style="font-family: Cambria;">Password</label>
-                      <input type="password" id="form2Example27" class="form-control form-control-lg" placeholder="**********" />
+                      <input type="password" name="password" id="form2Example27" class="form-control form-control-lg" placeholder="**********" />
                     </div>
+                    
 
                     <div class="pt-1 mb-4" style="text-align: center;">
-                      <a class="btn btn-light" href="/home" role="button">Accept</a>
+                      <button class="btn btn-light" type="submit">Accept</button>
                       <button class="btn btn-light" type="button">Clear</button>
 
                     </div>
 
-                    <p class="mb-5 pb-lg-2" style="color: #393f81; text-align: center; font-family: Cambria;">Don't have an account? <a href="signup" style="color: #393f81;">Register here</a></p>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81; text-align: center; font-family: Cambria;">Don't have an account? <a href="/register" style="color: #393f81;">Register here</a></p>
 
                   </form>
+
+
 
                 </div>
               </div>

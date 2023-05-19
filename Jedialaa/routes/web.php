@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return view('landing');
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('auth.login');
 });
+Route::get('/register', function () {
+    return view('auth.register');
+});
+
+
 Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/signup', function () {
-    return view('signup');
-});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+Route::get('/error', function () {
+    return view('error');
+})->name('error');
+
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
