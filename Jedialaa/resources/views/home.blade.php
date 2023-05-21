@@ -35,16 +35,29 @@
         }
         .icon-button:hover{
           background-color: rgba(255, 255, 255, 0.2);
-          border: none;
           cursor: pointer;
         }
         .profile-button-img {
             width: 50px;
         }
 
+        .btn-primary{
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            background-color:#7A8ED8;
+            border: none;
+            border-radius: 10%;
+            padding: 10px;
+        }
+        .btn-primary:hover{
+            background-color:#a9b7eb;
+            cursor: pointer;
+        }
+
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 20px;
             justify-items: center;
             padding: 20px;
@@ -86,10 +99,16 @@
 
     <h3 style="text-align: left; padding-left: 8%; padding-top: 2% ; font-family: Cambria;">Welcome,
         {{ Auth::User()->name }} </h3>
-    <h2 style="text-align: left; padding-left: 8%; padding-top: 5px ; font-family: Cambria; ">Your files: </h2>
+
+    <div style="display: block; text-align: end; padding-right:20px;">
+        <button class="btn-primary">+ New</button>
+    </div>
+
+    <h2 style="text-align: left; padding-left: 8%; padding-top: 5px ; font-family: Cambria; display: inline;">Your files: </h2>
+
 
     <div class="card-grid">
-        @for ($i = 0; $i < 8; $i++)
+        @for ($i = 0; $i < 18; $i++)
             <div class="card">Proyecto {{ $i + 1 }}</div>
         @endfor
     </div>
