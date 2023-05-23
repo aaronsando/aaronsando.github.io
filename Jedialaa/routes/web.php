@@ -27,7 +27,7 @@ Route::get('/register', function () {
 });
 
 
-Route::get('/home/{id}', [UserController::class, 'show']);
+Route::get('/home', [UserController::class, 'show']);
 
 Route::post('/home', [ProjectController::class, 'store']);
 

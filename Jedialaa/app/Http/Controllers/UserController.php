@@ -36,11 +36,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        // return User::with('projects')->find($id);
-
-        $user = User::with('projects')->find($id);
+        $user = User::with('projects')->find(Auth()->User()->id);
         return view('home2', ['user' => $user]);
     }
 
