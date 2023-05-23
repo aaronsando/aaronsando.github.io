@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,9 @@ Route::get('/register', function () {
 });
 
 
-Route::get('/home', function () {
-    return view('home2');
-});
+Route::get('/home/{id}', [UserController::class, 'show']);
+
+Route::post('/home', [ProjectController::class, 'store']);
 
 
 Route::get('/welcome', function () {

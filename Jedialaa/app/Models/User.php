@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+    
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
 }

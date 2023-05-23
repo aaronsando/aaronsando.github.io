@@ -14,14 +14,21 @@
     </script>
 
     <style>
+        :root{
+            --purple-light: #cfdaff;
+            --purple-main: #94a8f3;
+            --purple-dark: #7a8ed8;
+            --purple-darker: #6776af;
+        }
+
         .btn-jedialaa {
-            background-color: #899de7;
+            background-color: var(--purple-main);
             color: white;
-            border: 1px solid #525f92;
+            /* border: 1px solid #525f92; */
         }
 
         .btn-jedialaa:hover {
-            background-color: #525f92;
+            background-color: var(--purple-darker);
             color: white;
         }
 
@@ -30,16 +37,16 @@
         }
 
         .card:hover {
-            background-color: #cfdaff;
+            background-color: var(--purple-light);
             transition: 150ms all ease-in-out;
             transform: scale(103%);
         }
     </style>
 </head>
 
-<body style="background-color: #7a8ed8;">
+<body style="background-color: var(--purple-dark);">
 
-    <nav class="navbar navbar-light" style="background-color: #899de7;">
+    <nav class="navbar navbar-light" style="background-color: var(--purple-main);">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/logo.png') }}" alt="" width="40" height="40">
@@ -72,17 +79,17 @@
         </div>
         <div class="row">
 
-            @for ($i = 0; $i < 8; $i++)
+            @foreach($user->projects as $project)
                 <div class="col-3 mt-4">
                     <a href="#" class=" text-decoration-none">
                         <div class="card" style="height:10rem;">
                             <div class="card-body d-flex align-items-center justify-content-center">
-                                <h4 class="card-title m-0 text-dark overflow-hidden">Project title</h4>
+                                <h4 class="card-title m-0 text-dark overflow-hidden">{{ $project->name }}</h4>
                             </div>
                         </div>
                     </a>
                 </div>
-            @endfor
+            @endforeach
 
         </div>
     </div>
@@ -92,30 +99,38 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalNewProject" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newProjectLabel" aria-hidden="true">
+    <div class="modal fade" id="modalNewProject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newProjectLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="newProjectLabel">Create new project</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="clearInputs()"></button>
                 </div>
 
-                <form action="https://www.youtube.com">
+                <form action="/home" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
                     <div class="modal-body">
                         <div class="">
-                          <label for="name" class="form-label">Project name</label>
-                          <input type="text" name="name" id="name" placeholder="Project#X" class="form-control">
+                          <label for="projname" class="form-label">Project name</label>
+                          <input type="text" name="name" id="projname" class="form-control" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Understood</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearInputs()">Close</button>
+                        <button type="submit" class="btn btn-jedialaa">Create</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
+
+    <script>
+        function clearInputs() {
+            document.getElementById('projname').value = '';
+        }
+    </script>
 </body>
 
 </html>
