@@ -44,7 +44,7 @@
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/logo.png') }}" alt="" width="40" height="40">
             </a>
-            <h5 class="text-center m-0 text-light">JEDIALAA</h5>
+            <h5 class="text-center m-0 text-light" style="font-family: Cambria;">JEDIALAA</h5>
             <form action="{{ url('/logout') }}" method="POST">
                 <h5 class="m-0 text-light">
                     {{ Auth::User()->name }}
