@@ -50,7 +50,7 @@
                     <div style="display: grid;">
                         <a class="btn btn-outline-secondary btn-block mb-4" href="/login" role="button">Log In</a>
                         <p >OR</p>
-                        <a class="btn btn-outline-secondary btn-block mb-4" href="/signup" role="button">Sign Up</a>
+                        <a class="btn btn-outline-secondary btn-block mb-4" href="/register" role="button">Sign Up</a>
                     </div>
 
 

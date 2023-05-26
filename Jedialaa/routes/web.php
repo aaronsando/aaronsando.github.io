@@ -38,5 +38,8 @@ Route::get('/welcome', function () {
 Route::get('/error', function () {
     return view('error');
 })->name('error');
+Route::get('/createwireframe', function () {
+    return view('createwireframe');
+});
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
