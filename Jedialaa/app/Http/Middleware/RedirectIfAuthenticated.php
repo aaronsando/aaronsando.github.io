@@ -24,7 +24,8 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             }
             // else{
-            //     return redirect('login');
+            //     $error = "Algo fallo quien sabe que";
+            //     return redirect('login', ['error' => '$error']);
             // }
         }
 

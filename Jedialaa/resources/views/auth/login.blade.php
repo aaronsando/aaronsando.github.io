@@ -10,8 +10,21 @@
 </head>
 
 <body>
+
   <!-- Inicia Formulario -->
   <section class="vh-100" style="background-color: #7A8ED8;">
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-10 col-xl-10">
@@ -28,7 +41,7 @@
 
                   <form action="{{ url('login/') }}" method="post">
                     @csrf
-                    
+
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <span class="h1 fw-bold mb-0" style="color: #7A8ED8; font-family: Cambria;">Log In Jedialaa</span>
                     </div>
