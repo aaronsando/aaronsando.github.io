@@ -18,8 +18,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+
     <style>
-        :root{
+        :root {
             --purple-light: #cfdaff;
             --purple-main: #94a8f3;
             --purple-dark: #7a8ed8;
@@ -46,37 +48,42 @@
             transition: 150ms all ease-in-out;
             transform: scale(103%);
         }
+
         .styled-select select {
             background: transparent;
             border: none;
             font-size: 14px;
             height: 29px;
-            padding: 5px; /* If you add too much padding here, the options won't show in IE */
+            padding: 5px;
+            /* If you add too much padding here, the options won't show in IE */
             width: 168px;
             font-family: Cambria;
         }
-        .main, {
-        background: #fff;
-        width: 90%;
-        max-width: 1000px;
-        margin: 20px auto;
+
+        .main,
+            {
+            background: #fff;
+            width: 90%;
+            /* min-height: 90vh; */
+            margin: 20px auto;
         }
 
         .de {
-        width: 20%;
-        background: #899DE7;
-        float: right;
-        padding: 20px;
-        box-sizing: border-box;
-        height: 650px;
+            width: 20%;
+            background: #b9c4ee;
+            float: right;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 90vh;
         }
-        .iz{
-        width: 20%;
-        background: #899DE7;
-        float: left;
-        padding: 20px;
-        box-sizing: border-box;
-        height: 650px;
+
+        .iz {
+            width: 20%;
+            background: #b9c4ee;
+            float: left;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 90vh;
         }
     </style>
 </head>
@@ -97,9 +104,9 @@
                 <h5 class="text-center m-0 text-light" style="font-family: Cambria; ">JEDIALAA</h5>
             </a>
             <form action="{{ url('/logout') }}" method="POST">
+                @csrf
                 <h5 class="m-0 text-light">
                     {{ Auth::User()->name }}
-                    @csrf
                     <button class="btn btn-jedialaa border border-0 p-2" style="margin-left: 20px;">
                         <img src="{{ asset('images/logout.png') }}" alt="Log out" width="32" height="32">
                     </button>
@@ -119,8 +126,61 @@
         </aside>
     </section>
 
+    <script>
+        var arreglo = []
+        var mouseXInicial
+        var mouseYInicial
+        var mouseXFinal
+        var mouseYFinal
 
-    
+        var canvasWidth = 1125;
+        var canvasHeight = 850;
+
+        var figuraSeleccionada = 'rect'
+
+        function setup() {
+            createCanvas(canvasWidth, canvasHeight);
+        }
+
+        function draw() {
+            background(150);
+            arreglo.forEach(figura => {
+                if(figura.tipo == "rect"){
+                    rect(figura.x, figura.y, figura.ancho, figura.alto)
+                }
+            });
+        }
+
+        function mousePressed(){
+            mouseXInicial = mouseX
+            mouseYInicial = mouseY
+        }
+        
+        function mouseReleased(){
+            mouseXFinal = mouseX
+            mouseYFinal = mouseY 
+            if(mouseXInicial < 0 || mouseXInicial > canvasWidth
+            || mouseYInicial < 0 || mouseYInicial > canvasHeight
+            || mouseXFinal < 0 || mouseXFinal > canvasWidth
+            || mouseYFinal < 0 || mouseYFinal > canvasHeight){
+                alert("Click afuera del canvas")
+            }
+
+
+            else{
+                if(figuraSeleccionada=='rect'){
+                    arreglo.push({
+                        "x": mouseXInicial,
+                        "y": mouseYInicial,
+                        "ancho": mouseXFinal - mouseXInicial,
+                        "alto": mouseYFinal - mouseYInicial,
+                        "tipo": "rect"
+                    })
+                }
+            }
+        }
+    </script>
+
 </body>
 
 </html>
