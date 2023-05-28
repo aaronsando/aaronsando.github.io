@@ -28,6 +28,10 @@
             --purple-darker: #6776af;
         }
 
+        canvas{
+            cursor: crosshair;
+        }
+
         .btn-jedialaa {
             background-color: var(--purple-main);
             color: white;
@@ -37,6 +41,9 @@
         .btn-jedialaa:hover {
             background-color: var(--purple-darker);
             color: white;
+        }
+        .btn-active{
+            background-color: var(--purple-dark) !important;
         }
 
         .card {
@@ -85,6 +92,15 @@
             box-sizing: border-box;
             min-height: 90vh;
         }
+
+        .li-active{
+            background-color: var(--purple-main);
+            color: white;
+        }
+        .li-active:hover{
+            background-color: var(--purple-dark);
+            color: white;
+        }
     </style>
 </head>
 
@@ -92,13 +108,28 @@
 
     <nav class="navbar navbar-light" style="background-color: var(--purple-main);">
         <div class="container-fluid">
-            <div class="styled-select">
-                <select name="" id="">
-                    <option value="">Select a option</option>
-                    <option value="">Rect</option>
-                    <option value="">Circle</option>
-                    <option value="">Line</option>
-                </select>
+            <div>
+
+                <button onclick="selectFigure('cursor',0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/cursor-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
+                </button>
+
+                <button onclick="selectFigure('linea',1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/line-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
+                </button>
+                
+                <button onclick="selectFigure('rect',2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/square-w.png') }}" alt="Click and drag to draw a rectangle" width="32" height="32">
+                </button>
+
+                <button onclick="selectFigure('circ',3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/circle-w.png') }}" alt="Click and drag to draw an ellipse" width="32" height="32">
+                </button>
+
+                <button onclick="selectFigure('text',4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/text-w.png') }}" alt="Click and start writing your text" width="32" height="32">
+                </button>
+
             </div>
             <a class="navbar.tittle" href="/home">
                 <h5 class="text-center m-0 text-light" style="font-family: Cambria; ">JEDIALAA</h5>
@@ -115,7 +146,38 @@
         </div>
     </nav>
 
-    <section class="main">
+    <div class="row m-0">
+        <div class="col-2" style="background-color:gray">
+            <h4 class="text-light">Layers</h4>
+            @for ($i = 0; $i < 10; $i++)
+            
+            <div class="row m-0 mb-2" style="height:35px">
+                <div class="col-8 p-0">
+                    <button type="button" class="btn btn-light btn-capas w-100 h-100 p-1 text-start"> Nombre </button>
+                </div>
+                <div class="col-2 p-0">
+                    <button type="button" class="btn btn-light btn-capas w-100 h-100 p-0">
+                        <img src="{{ asset('images/arrow-up.png') }}" alt="Click and drag to draw a rectangle" width="20" height="20">
+                    </button>
+                </div>
+                <div class="col-2 p-0">
+                    <button type="button" class="btn btn-light btn-capas w-100 h-100 p-0">
+                        <img src="{{ asset('images/arrow-down.png') }}" alt="Click and drag to draw a rectangle" width="20" height="20">
+                    </button>
+                </div>
+            </div>
+            @endfor
+
+        </div>
+        <div id="canvasparent" class="col-8 p-0" style="min-height:300px">
+            
+        </div>
+        <div class="col-2" style="background-color:lightgray">
+            <h3>Properties</h3>
+        </div>
+    </div>
+
+    {{-- <section class="main">
         <aside class="de">
             <h3>Properties</h3>
             <p>Lorep Ipsum</p>
@@ -124,62 +186,10 @@
             <h3>Layers</h3>
             <p>Help mee</p>
         </aside>
-    </section>
+    </section> --}}
 
-    <script>
-        var arreglo = []
-        var mouseXInicial
-        var mouseYInicial
-        var mouseXFinal
-        var mouseYFinal
-
-        var canvasWidth = 1125;
-        var canvasHeight = 850;
-
-        var figuraSeleccionada = 'rect'
-
-        function setup() {
-            createCanvas(canvasWidth, canvasHeight);
-        }
-
-        function draw() {
-            background(150);
-            arreglo.forEach(figura => {
-                if(figura.tipo == "rect"){
-                    rect(figura.x, figura.y, figura.ancho, figura.alto)
-                }
-            });
-        }
-
-        function mousePressed(){
-            mouseXInicial = mouseX
-            mouseYInicial = mouseY
-        }
-        
-        function mouseReleased(){
-            mouseXFinal = mouseX
-            mouseYFinal = mouseY 
-            if(mouseXInicial < 0 || mouseXInicial > canvasWidth
-            || mouseYInicial < 0 || mouseYInicial > canvasHeight
-            || mouseXFinal < 0 || mouseXFinal > canvasWidth
-            || mouseYFinal < 0 || mouseYFinal > canvasHeight){
-                alert("Click afuera del canvas")
-            }
-
-
-            else{
-                if(figuraSeleccionada=='rect'){
-                    arreglo.push({
-                        "x": mouseXInicial,
-                        "y": mouseYInicial,
-                        "ancho": mouseXFinal - mouseXInicial,
-                        "alto": mouseYFinal - mouseYInicial,
-                        "tipo": "rect"
-                    })
-                }
-            }
-        }
-    </script>
+    <script src="{{ asset('js/misc.js') }}"></script>
+    <script src="{{ asset('js/painter.js') }}"></script>
 
 </body>
 
