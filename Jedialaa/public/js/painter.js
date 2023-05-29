@@ -62,6 +62,17 @@ function draw() {
     }
 }
 
+function clickEnCanvas(){
+    if (mouseXInicial > 0 && mouseXInicial < canvasWidth
+        && mouseYInicial > 0 && mouseYInicial < canvasHeight
+        // && mouseXFinal > 0 && mouseXFinal < canvasWidth
+        // && mouseYFinal > 0 && mouseYFinal < canvasHeight
+        ) {
+        return true
+    }
+    return false
+}
+
 function presionado() {
     dibujando = true
     
@@ -75,47 +86,51 @@ function mouseReleased() {
     mouseXFinal = mouseX
     mouseYFinal = mouseY
     if (clickEnCanvas()) {
-        if (figuraSeleccionada == 'linea') {
-            arreglo.push({
-                "x1": mouseXInicial,
-                "y1": mouseYInicial,
-                "x2": mouseXFinal,
-                "y2": mouseYFinal,
-                "tipo": "linea"
-            })
-        }
-        else if (figuraSeleccionada == 'rect') {
-            arreglo.push({
-                "x": mouseXInicial,
-                "y": mouseYInicial,
-                "ancho": mouseXFinal - mouseXInicial,
-                "alto": mouseYFinal - mouseYInicial,
-                "tipo": "rect"
-            })
-        }
-        else if (figuraSeleccionada == 'circ') {
-            arreglo.push({
-                "x": mouseXInicial + ((mouseXFinal - mouseXInicial) / 2),
-                "y": mouseYInicial + ((mouseYFinal - mouseYInicial) / 2),
-                "ancho": (mouseXFinal - mouseXInicial),
-                "alto": (mouseYFinal - mouseYInicial),
-                "tipo": "circ"
-            })
-        }
+        crearNuevaFigura()
     }
 
     mouseXInicial = undefined
     mouseYInicial = undefined
 }
 
-function clickEnCanvas(){
-    if (mouseXInicial > 0 && mouseXInicial < canvasWidth
-        && mouseYInicial > 0 && mouseYInicial < canvasHeight
-        // && mouseXFinal > 0 && mouseXFinal < canvasWidth
-        // && mouseYFinal > 0 && mouseYFinal < canvasHeight
-        ) {
-        return true
-    }
-    return false
-}
 
+
+function crearNuevaFigura() {
+    if (figuraSeleccionada == 'linea') {
+        cantLinea++
+        arreglo.push({
+            "nombre": "Linea "+cantLinea,
+            "x1": mouseXInicial,
+            "y1": mouseYInicial,
+            "x2": mouseXFinal,
+            "y2": mouseYFinal,
+            "tipo": "linea"
+        })
+    }
+    else if (figuraSeleccionada == 'rect') {
+        cantRect++
+        arreglo.push({
+            "nombre": "Rectangulo "+cantRect,
+            "x": mouseXInicial,
+            "y": mouseYInicial,
+            "ancho": mouseXFinal - mouseXInicial,
+            "alto": mouseYFinal - mouseYInicial,
+            "tipo": "rect"
+        })
+    }
+    else if (figuraSeleccionada == 'circ') {
+        cantCirc++
+        arreglo.push({
+            "nombre": "Elipse "+cantCirc,
+            "x": mouseXInicial + ((mouseXFinal - mouseXInicial) / 2),
+            "y": mouseYInicial + ((mouseYFinal - mouseYInicial) / 2),
+            "ancho": (mouseXFinal - mouseXInicial),
+            "alto": (mouseYFinal - mouseYInicial),
+            "tipo": "circ"
+        })
+    }
+    repintarBotonesCapas()
+
+    if(figuraSeleccionada!="cursor")
+        resaltarCapaCreada()
+}

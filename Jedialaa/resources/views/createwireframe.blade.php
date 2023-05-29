@@ -32,6 +32,12 @@
             cursor: crosshair;
         }
 
+        .btn:focus {
+            outline: 0 !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+
         .btn-jedialaa {
             background-color: var(--purple-main);
             color: white;
@@ -46,59 +52,13 @@
             background-color: var(--purple-dark) !important;
         }
 
-        .card {
-            transition: 100ms all ease-in-out;
-        }
-
-        .card:hover {
-            background-color: var(--purple-light);
-            transition: 150ms all ease-in-out;
-            transform: scale(103%);
-        }
-
-        .styled-select select {
-            background: transparent;
-            border: none;
-            font-size: 14px;
-            height: 29px;
-            padding: 5px;
-            /* If you add too much padding here, the options won't show in IE */
-            width: 168px;
-            font-family: Cambria;
-        }
-
-        .main,
-            {
-            background: #fff;
-            width: 90%;
-            /* min-height: 90vh; */
-            margin: 20px auto;
-        }
-
-        .de {
-            width: 20%;
-            background: #b9c4ee;
-            float: right;
-            padding: 20px;
-            box-sizing: border-box;
-            min-height: 90vh;
-        }
-
-        .iz {
-            width: 20%;
-            background: #b9c4ee;
-            float: left;
-            padding: 20px;
-            box-sizing: border-box;
-            min-height: 90vh;
-        }
-
-        .li-active{
-            background-color: var(--purple-main);
-            color: white;
-        }
-        .li-active:hover{
+        .btn-capa-active{
             background-color: var(--purple-dark);
+            color: white;
+            border: none;
+        }
+        .btn-capa-active:hover{
+            background-color: var(--purple-darker);
             color: white;
         }
     </style>
@@ -110,23 +70,23 @@
         <div class="container-fluid">
             <div>
 
-                <button onclick="selectFigure('cursor',0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
+                <button onclick="seleccionarFigura('cursor',0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/cursor-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
                 </button>
 
-                <button onclick="selectFigure('linea',1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="seleccionarFigura('linea',1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/line-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
                 </button>
                 
-                <button onclick="selectFigure('rect',2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="seleccionarFigura('rect',2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/square-w.png') }}" alt="Click and drag to draw a rectangle" width="32" height="32">
                 </button>
 
-                <button onclick="selectFigure('circ',3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="seleccionarFigura('circ',3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/circle-w.png') }}" alt="Click and drag to draw an ellipse" width="32" height="32">
                 </button>
 
-                <button onclick="selectFigure('text',4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="seleccionarFigura('text',4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/text-w.png') }}" alt="Click and start writing your text" width="32" height="32">
                 </button>
 
@@ -147,27 +107,8 @@
     </nav>
 
     <div class="row m-0">
-        <div class="col-2" style="background-color:gray">
-            <h4 class="text-light">Layers</h4>
-            @for ($i = 0; $i < 10; $i++)
-            
-            <div class="row m-0 mb-2" style="height:35px">
-                <div class="col-8 p-0">
-                    <button type="button" class="btn btn-light btn-capas w-100 h-100 p-1 text-start"> Nombre </button>
-                </div>
-                <div class="col-2 p-0">
-                    <button type="button" class="btn btn-light btn-capas w-100 h-100 p-0">
-                        <img src="{{ asset('images/arrow-up.png') }}" alt="Click and drag to draw a rectangle" width="20" height="20">
-                    </button>
-                </div>
-                <div class="col-2 p-0">
-                    <button type="button" class="btn btn-light btn-capas w-100 h-100 p-0">
-                        <img src="{{ asset('images/arrow-down.png') }}" alt="Click and drag to draw a rectangle" width="20" height="20">
-                    </button>
-                </div>
-            </div>
-            @endfor
-
+        <div id="listaCapas" class="col-2" style="background-color:gray">
+            <h4 class="text-light mt-2 mb-3">Layers</h4>
         </div>
         <div id="canvasparent" class="col-8 p-0" style="min-height:300px">
             
@@ -177,19 +118,13 @@
         </div>
     </div>
 
-    {{-- <section class="main">
-        <aside class="de">
-            <h3>Properties</h3>
-            <p>Lorep Ipsum</p>
-        </aside>
-        <aside class="iz">
-            <h3>Layers</h3>
-            <p>Help mee</p>
-        </aside>
-    </section> --}}
-
     <script src="{{ asset('js/misc.js') }}"></script>
     <script src="{{ asset('js/painter.js') }}"></script>
+
+    <script>
+        var arrow_up_img = "{{ asset('images/arrow-up.png') }}"
+        var arrow_down_img = "{{ asset('images/arrow-down.png') }}"
+    </script>
 
 </body>
 
