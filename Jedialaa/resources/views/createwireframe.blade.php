@@ -70,23 +70,23 @@
         <div class="container-fluid">
             <div>
 
-                <button onclick="seleccionarFigura('cursor',0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
+                <button onclick="selecBotonFigura('cursor',0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/cursor-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
                 </button>
 
-                <button onclick="seleccionarFigura('linea',1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="selecBotonFigura('linea',1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/line-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
                 </button>
                 
-                <button onclick="seleccionarFigura('rect',2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="selecBotonFigura('rect',2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/square-w.png') }}" alt="Click and drag to draw a rectangle" width="32" height="32">
                 </button>
 
-                <button onclick="seleccionarFigura('circ',3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="selecBotonFigura('circ',3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/circle-w.png') }}" alt="Click and drag to draw an ellipse" width="32" height="32">
                 </button>
 
-                <button onclick="seleccionarFigura('text',4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                <button onclick="selecBotonFigura('text',4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/text-w.png') }}" alt="Click and start writing your text" width="32" height="32">
                 </button>
 
