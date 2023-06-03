@@ -1,4 +1,4 @@
-function seleccionarFigura( selected, btnid ){
+function selecBotonFigura( selected, btnid ){
     figuraSeleccionada = selected
 
     var arrBtnsFiguras = document.getElementsByClassName('btn-figura')
@@ -12,11 +12,7 @@ function seleccionarFigura( selected, btnid ){
         }
     }
     
-    var arrBtnsCapasActivos = document.getElementsByClassName('btn-capa-active')
-    for (let index = 0; index < arrBtnsCapasActivos.length; index++) {
-        arrBtnsCapasActivos[index].classList.remove('btn-capa-active')
-    }
-
+    quitarActivoEnCapas()
 }
 
 function repintarBotonesCapas() {
@@ -75,6 +71,16 @@ function bajarCapa( num ){
     document.getElementById('capa'+(num-1)).classList.add('btn-capa-active')
 }
 
-function resaltarCapaCreada() {
-    document.getElementById('capa'+(arreglo.length-1)).classList.add('btn-capa-active')
+function resaltarCapa(index) {
+    document.getElementById('capa'+index).classList.add('btn-capa-active')
 }
+
+
+function quitarActivoEnCapas(){
+    var arrBtnsCapasActivos = document.getElementsByClassName('btn-capa-active')
+    for (let index = 0; index < arrBtnsCapasActivos.length; index++) {
+        arrBtnsCapasActivos[index].classList.remove('btn-capa-active')
+    }
+}
+
+
