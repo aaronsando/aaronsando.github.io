@@ -15,31 +15,37 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// })->name('welcome');
+
 Route::get('/', function () {
     return view('landing');
 });
 
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('login');
+
 Route::get('/register', function () {
     return view('auth.register');
 });
 
 
-Route::get('/home', [UserController::class, 'show']);
+Route::group(['middleware' => 'auth'], function(){
 
-Route::post('/home', [ProjectController::class, 'store']);
-
-
-Route::get('/welcome', function () {
-    return view('welcome');
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+    
+    Route::get('/home', [UserController::class, 'show']);
+    Route::post('/home', [ProjectController::class, 'store']);
+    
+    Route::get('/project', function () {
+        return view('project');
+    })->name('project');
 });
+
+
+
 Route::get('/error', function () {
     return view('error');
 })->name('error');
-Route::get('/createwireframe', function () {
-    return view('createwireframe');
-});
-
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');

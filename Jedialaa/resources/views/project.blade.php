@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Project workspace</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -70,36 +70,39 @@
         <div class="container-fluid">
             <div>
 
-                <button onclick="selecBotonFigura('cursor',0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
-                    <img src="{{ asset('images/cursor-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
+                <button onclick="selecBotonFigura('cursor', 0) " id="fig0" class="btn btn-jedialaa btn-figura btn-active border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/cursor-w.png') }}" alt="Select mode" width="32" height="32">
                 </button>
 
-                <button onclick="selecBotonFigura('linea',1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
-                    <img src="{{ asset('images/line-w.png') }}" alt="Click and drag to draw a line" width="32" height="32">
+                <button onclick="selecBotonFigura('linea', 1) " id="fig1" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/line-w.png') }}" alt="Line" width="32" height="32">
                 </button>
                 
-                <button onclick="selecBotonFigura('rect',2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
-                    <img src="{{ asset('images/square-w.png') }}" alt="Click and drag to draw a rectangle" width="32" height="32">
+                <button onclick="selecBotonFigura('rect', 2) " id="fig2" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/square-w.png') }}" alt="Rectangle" width="32" height="32">
                 </button>
 
-                <button onclick="selecBotonFigura('circ',3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
-                    <img src="{{ asset('images/circle-w.png') }}" alt="Click and drag to draw an ellipse" width="32" height="32">
+                <button onclick="selecBotonFigura('circ', 3) " id="fig3" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/circle-w.png') }}" alt="Ellipse" width="32" height="32">
                 </button>
 
-                <button onclick="selecBotonFigura('text',4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
-                    <img src="{{ asset('images/text-w.png') }}" alt="Click and start writing your text" width="32" height="32">
+                <button onclick="selecBotonFigura('text', 4) " id="fig4" class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
+                    <img src="{{ asset('images/text-w.png') }}" alt="Text" width="32" height="32">
                 </button>
 
             </div>
             <a class="navbar.tittle" href="/home">
                 <h5 class="text-center m-0 text-light" style="font-family: Cambria; ">JEDIALAA</h5>
             </a>
+
+
+
             <form action="{{ url('/logout') }}" method="POST">
                 @csrf
                 <h5 class="m-0 text-light">
-                    {{ Auth::User()->name }}
+                    Proj name
                     <button class="btn btn-jedialaa border border-0 p-2" style="margin-left: 20px;">
-                        <img src="{{ asset('images/logout.png') }}" alt="Log out" width="32" height="32">
+                        <img src="{{ asset('images/save-w.png') }}" alt="Save" width="32" height="32">
                     </button>
             </form>
             </h5>
