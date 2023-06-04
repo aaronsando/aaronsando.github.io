@@ -81,7 +81,7 @@
 
             @foreach($user->projects as $project)
                 <div class="col-3 mt-4">
-                    <a href="{{ url('/createwireframe') }}" class=" text-decoration-none">
+                    <a href="{{ url('/project/'.$project->id) }}" class=" text-decoration-none">
                         <div class="card" style="height:10rem;">
                             <div class="card-body d-flex align-items-center justify-content-center">
                                 <h4 class="card-title m-0 text-dark overflow-hidden">{{ $project->name }}</h4>

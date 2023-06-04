@@ -3,7 +3,7 @@ var dibujando = false
 var grosorDefault = 2
 
 var figuraSeleccionada = 'cursor'
-var arreglo = []
+
 var mouseXInicial
 var mouseYInicial
 var mouseXFinal
@@ -71,8 +71,7 @@ function draw() {
 
 function clickEnCanvas(){
     if (mouseXInicial > 0 && mouseXInicial < canvasWidth
-        && mouseYInicial > 0 && mouseYInicial < canvasHeight
-        ) {
+        && mouseYInicial > 0 && mouseYInicial < canvasHeight) {
         return true
     }
     return false
@@ -156,6 +155,8 @@ function crearNuevaFigura() {
         })
     }
 
+    actualizarArregloEnInput()
+
     repintarBotonesCapas()
 
     resaltarCapa(arreglo.length-1)
@@ -168,7 +169,6 @@ function crearNuevaFigura() {
 function clickEnFigura(){
     for (let index = (arreglo.length-1); index >= 0; index--) {
         if(arreglo[index].tipo == "rect"){
-            quitarActivoEnCapas()
             if(clickEnRect(index)){
                 // alert("Click en "+arreglo[index].nombre)
                 resaltarCapa(index)
@@ -176,7 +176,6 @@ function clickEnFigura(){
             }
         }
         else if(arreglo[index].tipo == "circ"){
-            quitarActivoEnCapas()
             if(clickEnCirc(index)){
                 // alert("Click en "+arreglo[index].nombre)
                 resaltarCapa(index)
@@ -184,7 +183,6 @@ function clickEnFigura(){
             }
         }
         else if(arreglo[index].tipo == "linea"){
-            quitarActivoEnCapas()
             if(clickEnLinea(index)){
                 // alert("Click en "+arreglo[index].nombre)
                 resaltarCapa(index)

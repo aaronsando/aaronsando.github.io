@@ -1,3 +1,7 @@
+actualizarArregloEnInput();
+repintarBotonesCapas();
+
+
 function selecBotonFigura( selected, btnid ){
     figuraSeleccionada = selected
 
@@ -26,7 +30,7 @@ function repintarBotonesCapas() {
         document.getElementById('listaCapas').insertAdjacentHTML('beforeend', `
             <div class="btn-capas row m-0 mb-2" style="height:35px">
                 <div class="col-8 p-0">
-                    <button type="button" id="capa`+index+`" class="btn btn-light w-100 h-100 p-1 pl-2 text-start"> `+arreglo[index].nombre+` </button>
+                    <button onclick="resaltarCapa(`+index+`)" type="button" id="capa`+index+`" class="btn btn-light w-100 h-100 p-1 pl-2 text-start"> `+arreglo[index].nombre+` </button>
                 </div>
                 <div class="col-2 p-0">
                     <button type="button" onclick="subirCapa(`+index+`)" class="btn btn-light w-100 h-100 p-0">
@@ -44,7 +48,7 @@ function repintarBotonesCapas() {
 
 function subirCapa( num ){
     if(num == arreglo.length-1){
-        alert("No se puede chamaco tonto");
+        // alert("No se puede chamaco tonto");
         return 
     }
 
@@ -58,7 +62,7 @@ function subirCapa( num ){
 
 function bajarCapa( num ){
     if(num == 0){
-        alert("No se puede chamaco tonto");
+        // alert("No se puede chamaco tonto");
         return 
     }
     
@@ -68,10 +72,11 @@ function bajarCapa( num ){
     
     repintarBotonesCapas();
 
-    document.getElementById('capa'+(num-1)).classList.add('btn-capa-active')
+    resaltarCapa(num-1);
 }
 
 function resaltarCapa(index) {
+    quitarActivoEnCapas()
     document.getElementById('capa'+index).classList.add('btn-capa-active')
 }
 
@@ -81,6 +86,12 @@ function quitarActivoEnCapas(){
     for (let index = 0; index < arrBtnsCapasActivos.length; index++) {
         arrBtnsCapasActivos[index].classList.remove('btn-capa-active')
     }
+}
+
+
+function actualizarArregloEnInput(){
+    document.getElementById('txtFigureArray').value = JSON.stringify(arreglo)
+    console.log("Se supone que se puso en el input el arreglo");
 }
 
 

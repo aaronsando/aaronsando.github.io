@@ -39,9 +39,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/home', [UserController::class, 'show']);
     Route::post('/home', [ProjectController::class, 'store']);
     
-    Route::get('/project', function () {
-        return view('project');
-    })->name('project');
+    Route::get('/project/{id}', [ProjectController::class, 'show']);
+    Route::put('/project/{id}', [ProjectController::class, 'update']);
 });
 
 

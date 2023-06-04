@@ -35,9 +35,11 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        //
+        $proj = Project::with('user')->find($id);
+        return view('project', ['proj' => $proj]);
+        // return $proj;
     }
 
     /**
@@ -53,7 +55,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        
+        // return $request->input('figureArray');
+        // return $request;
+        $project = Project::find($request->input('id'));
+        $project->figureArray = $request->input('figureArray');
+        $project->save();
+        return redirect('project/'.$request->input('id'));
     }
 
     /**
