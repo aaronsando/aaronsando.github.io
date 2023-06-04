@@ -1,6 +1,8 @@
 actualizarArregloEnInput();
 repintarBotonesCapas();
 
+var capaSeleccionada
+
 
 function selecBotonFigura( selected, btnid ){
     figuraSeleccionada = selected
@@ -48,7 +50,6 @@ function repintarBotonesCapas() {
 
 function subirCapa( num ){
     if(num == arreglo.length-1){
-        // alert("No se puede chamaco tonto");
         return 
     }
 
@@ -62,7 +63,6 @@ function subirCapa( num ){
 
 function bajarCapa( num ){
     if(num == 0){
-        // alert("No se puede chamaco tonto");
         return 
     }
     
@@ -76,8 +76,20 @@ function bajarCapa( num ){
 }
 
 function resaltarCapa(index) {
+    capaSeleccionada = index
     quitarActivoEnCapas()
-    document.getElementById('capa'+index).classList.add('btn-capa-active')
+    document.getElementById('capa'+capaSeleccionada).classList.add('btn-capa-active')
+
+    document.getElementById('capaname').innerHTML = arreglo[capaSeleccionada].nombre
+    if(arreglo[capaSeleccionada].tipo == "rect" || arreglo[capaSeleccionada].tipo == "circ"){
+        document.getElementById('xCoord').value = arreglo[capaSeleccionada].x
+        document.getElementById('yCoord').value = arreglo[capaSeleccionada].y
+        document.getElementById('ancho').value = arreglo[capaSeleccionada].ancho
+        document.getElementById('alto').value = arreglo[capaSeleccionada].alto
+    }
+    document.getElementById('colorRelleno').value = arreglo[capaSeleccionada].colorRelleno
+    document.getElementById('grosorContorno').value = arreglo[capaSeleccionada].grosorContorno
+    document.getElementById('colorContorno').value = arreglo[capaSeleccionada].colorContorno
 }
 
 
@@ -86,6 +98,7 @@ function quitarActivoEnCapas(){
     for (let index = 0; index < arrBtnsCapasActivos.length; index++) {
         arrBtnsCapasActivos[index].classList.remove('btn-capa-active')
     }
+    document.getElementById('capaname').innerHTML = "Selecciona una figura"
 }
 
 
