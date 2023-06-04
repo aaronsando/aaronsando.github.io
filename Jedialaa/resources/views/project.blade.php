@@ -61,6 +61,7 @@
             background-color: var(--purple-darker);
             color: white;
         }
+        
     </style>
 </head>
 
@@ -111,14 +112,56 @@
 
     <div class="row m-0">
         <div id="listaCapas" class="col-2" style="background-color:gray">
-            <h4 class="text-light mt-2 mb-3">Layers</h4>
+            <h4 class="text-light mt-2 mb-3" style="text-align:center">Layers</h4>
         </div>
         <div id="canvasparent" class="col-8 p-0" style="min-height:300px">
             
         </div>
-        <div class="col-2" style="background-color:lightgray">
-            <h3>Properties</h3>
+        <div id="listaCapas" class="col-2" style="background-color:gray">
+        <h4 class="text-light mt-2 mb-3" style="text-align:center">Properties</h4>
+        <div >
+            <div class="input-group">
+                <span class="input-group-text">X</span>
+                <input type="text" aria-label="X" class="form-control">
+                <span class="input-group-text">Y</span>
+                <input type="text" aria-label="Y" class="form-control">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">W</span>
+                <input type="text" aria-label="W" class="form-control">
+                <span class="input-group-text">H</span>
+                <input type="text" aria-label="H" class="form-control">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Fill</span>
+                <input type="color" class="form-control form-control-color">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Border</span>
+                <input type="color" class="form-control form-control-color">
+                <input type="text" class="form-control" placeholder="0px">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-text">Radius-corner</span>
+                <input type="text" class="form-control" placeholder="0px">
+            </div>
+            <br>
+            <div class="input-group">
+                <label  class="form-label">Fill Opacity</label>
+                <input type="range" class="form-range" >
+            </div>
+            <br>
+            <div class="input-group">
+                <label  class="form-label">Border Opacity</label>
+                <input type="range" class="form-range" >
+            </div>
         </div>
+        </div>
+    </div>
     </div>
 
     <script src="{{ asset('js/misc.js') }}"></script>
