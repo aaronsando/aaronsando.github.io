@@ -4,6 +4,11 @@ var grosorDefault
 var colorRellenoDefault
 var colorContornoDefault
 
+var colorRellenoDefaultP5
+var colorContornoDefaultP5
+
+var colorFigP5
+
 var figuraSeleccionada = 'cursor'
 
 var mouseXInicial
@@ -27,6 +32,10 @@ function setup() {
     grosorDefault = 2
     colorRellenoDefault = "#00ffff"
     colorContornoDefault = "#ff00ff"
+    opacRellDef = 50
+
+    colorRellenoDefaultP5 = color(colorRellenoDefault)
+    colorContornoDefaultP5 = color(colorContornoDefault)
 
     var canvas = createCanvas(canvasWidth, canvasHeight)
     canvas.parent("canvasparent")
@@ -41,7 +50,10 @@ function draw() {
     background(235)
 
     arreglo.forEach(figura => {
-        fill(figura.colorRelleno)
+        colorFigP5 = color(figura.colorRelleno)
+        colorFigP5.setAlpha(figura.opacRell)
+        fill(colorFigP5)
+        
         stroke(figura.colorContorno)
         strokeWeight(figura.grosorContorno)
 
@@ -56,14 +68,13 @@ function draw() {
         }
     });
 
-    fill(colorRellenoDefault)
-    stroke(colorContornoDefault)
+    fill(colorRellenoDefaultP5)
+    stroke(colorContornoDefaultP5)
     strokeWeight(grosorDefault)
     
 
     if(dibujando){
         if(clickEnCanvas){
-            fill(255,255,255,127)
             if(figuraSeleccionada == "rect"){
                 rect(mouseXInicial, mouseYInicial, mouseX-mouseXInicial, mouseY-mouseYInicial)
             }
@@ -92,6 +103,8 @@ function clickEnCanvas(){
 
 function presionado() {
     dibujando = true
+    colorRellenoDefaultP5.setAlpha(100)
+    fill(colorRellenoDefaultP5)
     
     mouseXInicial = mouseX
     mouseYInicial = mouseY
@@ -99,6 +112,9 @@ function presionado() {
 
 function mouseReleased() {
     dibujando = false
+
+    colorRellenoDefaultP5.setAlpha(255)
+    fill(colorRellenoDefaultP5)
 
     mouseXFinal = mouseX
     mouseYFinal = mouseY
@@ -133,6 +149,7 @@ function crearNuevaFigura() {
             "x2": mouseXFinal,
             "y2": mouseYFinal,
             "colorRelleno": colorRellenoDefault,
+            "opacRell": opacRellDef,
             "colorContorno": colorContornoDefault,
             "grosorContorno": grosorDefault,
             "tipo": "linea"
@@ -154,6 +171,7 @@ function crearNuevaFigura() {
             "ancho": mouseXFinal - mouseXInicial,
             "alto": mouseYFinal - mouseYInicial,
             "colorRelleno": colorRellenoDefault,
+            "opacRell": opacRellDef,
             "colorContorno": colorContornoDefault,
             "grosorContorno": grosorDefault,
             "tipo": "rect"
@@ -168,6 +186,7 @@ function crearNuevaFigura() {
             "ancho": (mouseXFinal - mouseXInicial),
             "alto": (mouseYFinal - mouseYInicial),
             "colorRelleno": colorRellenoDefault,
+            "opacRell": opacRellDef,
             "colorContorno": colorContornoDefault,
             "grosorContorno": grosorDefault,
             "tipo": "circ"
