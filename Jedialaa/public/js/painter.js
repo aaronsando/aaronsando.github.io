@@ -53,7 +53,7 @@ function draw() {
         colorFigP5 = color(figura.colorRelleno)
         colorFigP5.setAlpha(figura.opacRell)
         fill(colorFigP5)
-        
+
         stroke(figura.colorContorno)
         strokeWeight(figura.grosorContorno)
 
@@ -134,14 +134,10 @@ function mouseReleased() {
 
 
 function crearNuevaFigura() {
+    var tipoTemp
     if (figuraSeleccionada == 'linea') {
         cantLinea++
-
-        // if(mouseXInicial > mouseXFinal || mouseYInicial > mouseYFinal){
-        //     [mouseYInicial, mouseYFinal] = [mouseYFinal, mouseYInicial];
-        //     [mouseXInicial, mouseXFinal] = [mouseXFinal, mouseXInicial];
-        // }
-        
+        tipoTemp = "linea"
         arreglo.push({
             "nombre": "Line "+cantLinea,
             "x1": mouseXInicial,
@@ -157,12 +153,11 @@ function crearNuevaFigura() {
     }
     else if (figuraSeleccionada == 'rect') {
         cantRect++
-
+        tipoTemp = "rect"
         if(mouseXInicial > mouseXFinal)
             [mouseXInicial, mouseXFinal] = [mouseXFinal, mouseXInicial]
         if(mouseYInicial > mouseYFinal)
             [mouseYInicial, mouseYFinal] = [mouseYFinal, mouseYInicial]
-        
 
         arreglo.push({
             "nombre": "Rectangle "+cantRect,
@@ -179,6 +174,7 @@ function crearNuevaFigura() {
     }
     else if (figuraSeleccionada == 'circ') {
         cantCirc++
+        tipoTemp = "circ"
         arreglo.push({
             "nombre": "Ellipse "+cantCirc,
             "x": mouseXInicial + ((mouseXFinal - mouseXInicial) / 2),
@@ -197,7 +193,7 @@ function crearNuevaFigura() {
 
     repintarBotonesCapas()
 
-    resaltarCapa(arreglo.length-1)
+    resaltarCapa(arreglo.length-1, tipoTemp)
 }
 
 
@@ -208,19 +204,19 @@ function clickEnFigura(){
     for (let index = (arreglo.length-1); index >= 0; index--) {
         if(arreglo[index].tipo == "rect"){
             if(clickEnRect(index)){
-                resaltarCapa(index)
+                resaltarCapa(index, "rect")
                 return
             }
         }
         else if(arreglo[index].tipo == "circ"){
             if(clickEnCirc(index)){
-                resaltarCapa(index)
+                resaltarCapa(index, "circ")
                 return
             }
         }
         else if(arreglo[index].tipo == "linea"){
             if(clickEnLinea(index)){
-                resaltarCapa(index)
+                resaltarCapa(index, "linea")
                 return
             }
         }

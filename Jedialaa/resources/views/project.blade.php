@@ -122,58 +122,23 @@
     </nav>
 
     <div class="row m-0">
+
         <div id="listaCapas" class="col-2" style="background-color:gray">
             <h4 class="text-light mt-2 mb-3" style="text-align:center">Layers</h4>
         </div>
+
         <div id="canvasparent" class="col-8 p-0" style="min-height:300px">
 
         </div>
-        <div id="listaCapas" class="col-2" style="background-color:gray">
+
+        <div class="col-2" style="background-color:gray">
             <h4 class="text-light mt-2 mb-3" style="text-align:center">Properties</h4>
-            <h6 id="capaname" class="text-light mt-2 mb-3" style="text-align:center">Selecciona una figura</h6>
-            <div>
-                <div class="input-group">
-                    <span class="input-group-text">X</span>
-                    <input id="xCoord" type="text" aria-label="X" class="form-control">
-                    <span class="input-group-text">Y</span>
-                    <input id="yCoord" type="text" aria-label="Y" class="form-control">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-text">W</span>
-                    <input id="ancho" type="text" aria-label="W" class="form-control">
-                    <span class="input-group-text">H</span>
-                    <input id="alto" type="text" aria-label="H" class="form-control">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-text">Fill</span>
-                    <input id="colorRelleno" type="color" class="form-control form-control-color">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-text">Border</span>
-                    <input id="colorContorno" type="color" class="form-control form-control-color">
-                    <input id="grosorContorno" type="text" class="form-control">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-text">Radius-corner</span>
-                    <input type="text" class="form-control">
-                </div>
-                <br>
-                <div class="input-group">
-                    <label class="form-label">Fill Opacity</label>
-                    <input type="range" class="form-range">
-                </div>
-                <br>
-                <div class="input-group">
-                    <label class="form-label">Border Opacity</label>
-                    <input type="range" class="form-range">
-                </div>
-            </div>
+            <h6 id="capaname" class="text-light mt-2 mb-3" style="text-align:center">Select a shape</h6>
+            @include('comp.rectProperties')
+            @include('comp.ellipseProperties')
+            @include('comp.lineProperties')
         </div>
-    </div>
+
     </div>
     <script>
 
