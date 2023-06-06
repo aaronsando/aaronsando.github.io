@@ -18,11 +18,6 @@ var mouseYInicial
 var mouseXFinal
 var mouseYFinal
 
-var cantRect = 0
-var cantCirc = 0
-var cantLinea = 0
-var cantText = 0
-
 var canvasWidth
 var canvasHeight = 850;
 

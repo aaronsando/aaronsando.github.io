@@ -1,8 +1,36 @@
 actualizarArregloEnInput()
+contarFiguras()
 repintarBotonesCapas()
 
 var capaSeleccionada
 
+
+var cantRect
+var cantCirc
+var cantLinea
+var cantTexto
+
+function contarFiguras() {
+    cantRect = 0
+    cantCirc = 0
+    cantLinea = 0
+    cantTexto = 0
+
+    for (let index = 0; index < arreglo.length; index++) {
+        if(arreglo[index].tipo == "rect"){
+            cantRect++
+        }
+        else if(arreglo[index].tipo == "circ"){
+            cantCirc++
+        }
+        else if(arreglo[index].tipo == "linea"){
+            cantLinea++
+        }
+        else if(arreglo[index].tipo == "texto"){
+            cantTexto++
+        }
+    }
+}
 
 
 function actualizarPropiedades(){
