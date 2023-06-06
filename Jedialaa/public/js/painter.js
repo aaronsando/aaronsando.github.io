@@ -1,8 +1,10 @@
 var dibujando = false
 
-var grosorDefault
 var colorRellenoDefault
+var opacRellDef
 var colorContornoDefault
+var opacContDef
+var grosorDefault
 
 var colorRellenoDefaultP5
 var colorContornoDefaultP5
@@ -29,10 +31,11 @@ function setup() {
     var canvasDiv = document.getElementById("canvasparent");
     canvasWidth = canvasDiv.offsetWidth;
 
-    grosorDefault = 2
-    colorRellenoDefault = "#00ffff"
-    colorContornoDefault = "#ff00ff"
-    opacRellDef = 50
+    grosorDefault = 1
+    colorRellenoDefault = "#ffffff"
+    colorContornoDefault = "#000000"
+    opacRellDef = 255
+    opacContDef = 255
 
     colorRellenoDefaultP5 = color(colorRellenoDefault)
     colorContornoDefaultP5 = color(colorContornoDefault)
@@ -53,8 +56,10 @@ function draw() {
         colorFigP5 = color(figura.colorRelleno)
         colorFigP5.setAlpha(figura.opacRell)
         fill(colorFigP5)
-
-        stroke(figura.colorContorno)
+        
+        colorFigP5 = color(figura.colorContorno)
+        colorFigP5.setAlpha(figura.opacCont)
+        stroke(colorFigP5)
         strokeWeight(figura.grosorContorno)
 
         if (figura.tipo == "linea") {
@@ -113,11 +118,12 @@ function presionado() {
 function mouseReleased() {
     dibujando = false
 
-    colorRellenoDefaultP5.setAlpha(255)
+    colorRellenoDefaultP5.setAlpha(opacRellDef)
     fill(colorRellenoDefaultP5)
 
     mouseXFinal = mouseX
     mouseYFinal = mouseY
+
     if (clickEnCanvas()) {
         if(figuraSeleccionada == 'cursor'){
             clickEnFigura()
@@ -147,6 +153,7 @@ function crearNuevaFigura() {
             "colorRelleno": colorRellenoDefault,
             "opacRell": opacRellDef,
             "colorContorno": colorContornoDefault,
+            "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
             "tipo": "linea"
         })
@@ -168,6 +175,7 @@ function crearNuevaFigura() {
             "colorRelleno": colorRellenoDefault,
             "opacRell": opacRellDef,
             "colorContorno": colorContornoDefault,
+            "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
             "tipo": "rect"
         })
@@ -184,6 +192,7 @@ function crearNuevaFigura() {
             "colorRelleno": colorRellenoDefault,
             "opacRell": opacRellDef,
             "colorContorno": colorContornoDefault,
+            "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
             "tipo": "circ"
         })
@@ -200,7 +209,7 @@ function crearNuevaFigura() {
 
 
 
-function clickEnFigura(){
+function clickEnFigura() {
     for (let index = (arreglo.length-1); index >= 0; index--) {
         if(arreglo[index].tipo == "rect"){
             if(clickEnRect(index)){
@@ -226,10 +235,10 @@ function clickEnFigura(){
 
 function clickEnRect(index) {
     if(
-        (mouseXFinal >= arreglo[index].x - arreglo[index].grosorContorno/2) && 
-        (mouseXFinal <= (arreglo[index].x + arreglo[index].ancho + arreglo[index].grosorContorno/2)) &&
-        (mouseY >= arreglo[index].y - arreglo[index].grosorContorno/2) && 
-        (mouseY <= (arreglo[index].y + arreglo[index].alto + arreglo[index].grosorContorno/2))
+        (mouseXFinal >= (arreglo[index].x - arreglo[index].grosorContorno)) && 
+        (mouseXFinal <= (arreglo[index].x + arreglo[index].ancho + arreglo[index].grosorContorno)) &&
+        (mouseY >= (arreglo[index].y - arreglo[index].grosorContorno)) && 
+        (mouseY <= (arreglo[index].y + arreglo[index].alto + arreglo[index].grosorContorno))
         ){
             return true
     }
@@ -242,7 +251,7 @@ function clickEnCirc(index) {
     }
     return false
 }
-function clickEnLinea(index){
+function clickEnLinea(index) {
     var tolerance = 4;
     var m = (arreglo[index].y1 - arreglo[index].y2) / (arreglo[index].x1 - arreglo[index].x2);
     var b = arreglo[index].y1 - (m * arreglo[index].x1);

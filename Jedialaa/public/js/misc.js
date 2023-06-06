@@ -1,8 +1,23 @@
-actualizarArregloEnInput();
-repintarBotonesCapas();
+actualizarArregloEnInput()
+repintarBotonesCapas()
 
 var capaSeleccionada
 
+
+
+function actualizarPropiedades(){
+    if(arreglo[capaSeleccionada].tipo == "rect"){
+        actualizarPropiedadesRect()
+    }
+    else if (arreglo[capaSeleccionada].tipo == "circ"){
+        actualizarPropiedadesCirc()
+    }
+
+    else if (arreglo[capaSeleccionada].tipo == "linea"){
+        actualizarPropiedadesLinea()
+    }
+    actualizarArregloEnInput()
+}
 
 function selecBotonFigura( selected, btnid ){
     figuraSeleccionada = selected
@@ -77,7 +92,6 @@ function bajarCapa( num ){
 }
 
 function resaltarCapa(index, tipo) {
-    // console.log("Se seleccionó una figura tipo " + tipo);
     capaSeleccionada = index
     quitarActivoEnCapas()
 
@@ -86,44 +100,56 @@ function resaltarCapa(index, tipo) {
 
     document.getElementById('capaname').innerHTML = arreglo[capaSeleccionada].nombre
     if(arreglo[capaSeleccionada].tipo == "rect"){
-        document.getElementById('rect-properties').style.display = "block"
-
-        document.getElementById('rect-x').value = arreglo[capaSeleccionada].x
-        document.getElementById('rect-y').value = arreglo[capaSeleccionada].y
-        document.getElementById('rect-ancho').value = arreglo[capaSeleccionada].ancho
-        document.getElementById('rect-alto').value = arreglo[capaSeleccionada].alto
-        document.getElementById('rect-color-relleno').value = arreglo[capaSeleccionada].colorRelleno
-        document.getElementById('rect-color-contorno').value = arreglo[capaSeleccionada].colorContorno
-        document.getElementById('rect-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
-        document.getElementById('rect-radio').value = 15
-        document.getElementById('rect-opac-rell').value = 100
-        document.getElementById('rect-opac-cont').value = 100
+        mostrarPropiedadesRect()
     }
     else if (arreglo[capaSeleccionada].tipo == "circ"){
-        document.getElementById('ellipse-properties').style.display = "block"
-    
-        document.getElementById('ellipse-x').value = arreglo[capaSeleccionada].x
-        document.getElementById('ellipse-y').value = arreglo[capaSeleccionada].y
-        document.getElementById('ellipse-ancho').value = arreglo[capaSeleccionada].ancho
-        document.getElementById('ellipse-alto').value = arreglo[capaSeleccionada].alto
-        document.getElementById('ellipse-color-relleno').value = arreglo[capaSeleccionada].colorRelleno
-        document.getElementById('ellipse-color-contorno').value = arreglo[capaSeleccionada].colorContorno
-        document.getElementById('ellipse-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
-        document.getElementById('ellipse-opac-rell').value = 100
-        document.getElementById('ellipse-opac-cont').value = 100
+        mostrarPropiedadesCirc()
     }
 
     else if (arreglo[capaSeleccionada].tipo == "linea"){
-        document.getElementById('line-properties').style.display = "block"
-    
-        document.getElementById('line-x1').value = arreglo[capaSeleccionada].x1
-        document.getElementById('line-y1').value = arreglo[capaSeleccionada].y1
-        document.getElementById('line-x2').value = arreglo[capaSeleccionada].x2
-        document.getElementById('line-y2').value = arreglo[capaSeleccionada].y2
-        document.getElementById('line-color-contorno').value = arreglo[capaSeleccionada].colorContorno
-        document.getElementById('line-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
-        document.getElementById('line-opac-cont').value = 100
+        mostrarPropiedadesLinea()
     }
+}
+
+function mostrarPropiedadesRect() {
+    document.getElementById('rect-properties').style.display = "block"
+
+    document.getElementById('rect-x').value = arreglo[capaSeleccionada].x
+    document.getElementById('rect-y').value = arreglo[capaSeleccionada].y
+    document.getElementById('rect-ancho').value = arreglo[capaSeleccionada].ancho
+    document.getElementById('rect-alto').value = arreglo[capaSeleccionada].alto
+    document.getElementById('rect-color-relleno').value = arreglo[capaSeleccionada].colorRelleno
+    document.getElementById('rect-opac-rell').value = arreglo[capaSeleccionada].opacRell
+    document.getElementById('rect-color-contorno').value = arreglo[capaSeleccionada].colorContorno
+    document.getElementById('rect-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
+    document.getElementById('rect-opac-cont').value = arreglo[capaSeleccionada].opacCont
+    document.getElementById('rect-radio').value = 15
+}
+
+function mostrarPropiedadesCirc() {
+    document.getElementById('ellipse-properties').style.display = "block"
+    
+    document.getElementById('ellipse-x').value = arreglo[capaSeleccionada].x
+    document.getElementById('ellipse-y').value = arreglo[capaSeleccionada].y
+    document.getElementById('ellipse-ancho').value = arreglo[capaSeleccionada].ancho
+    document.getElementById('ellipse-alto').value = arreglo[capaSeleccionada].alto
+    document.getElementById('ellipse-color-relleno').value = arreglo[capaSeleccionada].colorRelleno
+    document.getElementById('ellipse-color-contorno').value = arreglo[capaSeleccionada].colorContorno
+    document.getElementById('ellipse-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
+    document.getElementById('ellipse-opac-rell').value = arreglo[capaSeleccionada].opacRell
+    document.getElementById('ellipse-opac-cont').value = arreglo[capaSeleccionada].opacCont
+}
+
+function mostrarPropiedadesLinea() {
+    document.getElementById('line-properties').style.display = "block"
+    
+    document.getElementById('line-x1').value = arreglo[capaSeleccionada].x1
+    document.getElementById('line-y1').value = arreglo[capaSeleccionada].y1
+    document.getElementById('line-x2').value = arreglo[capaSeleccionada].x2
+    document.getElementById('line-y2').value = arreglo[capaSeleccionada].y2
+    document.getElementById('line-color-contorno').value = arreglo[capaSeleccionada].colorContorno
+    document.getElementById('line-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
+    document.getElementById('line-opac-cont').value = arreglo[capaSeleccionada].opacCont
 }
 
 
@@ -144,7 +170,41 @@ function quitarActivoEnCapas(){
 
 function actualizarArregloEnInput(){
     document.getElementById('txtFigureArray').value = JSON.stringify(arreglo)
-    console.log("Se supone que se puso en el input el arreglo");
 }
 
+
+function actualizarPropiedadesRect(){
+    arreglo[capaSeleccionada].x = parseFloat(document.getElementById('rect-x').value)
+    arreglo[capaSeleccionada].y = parseFloat(document.getElementById('rect-y').value)
+    arreglo[capaSeleccionada].ancho = parseFloat(document.getElementById('rect-ancho').value)
+    arreglo[capaSeleccionada].alto = parseFloat(document.getElementById('rect-alto').value)
+    arreglo[capaSeleccionada].colorRelleno = document.getElementById('rect-color-relleno').value
+    arreglo[capaSeleccionada].opacRell = parseFloat(document.getElementById('rect-opac-rell').value)
+    arreglo[capaSeleccionada].colorContorno = document.getElementById('rect-color-contorno').value
+    arreglo[capaSeleccionada].grosorContorno = parseFloat(document.getElementById('rect-grosor-contorno').value)
+    arreglo[capaSeleccionada].opacCont = parseFloat(document.getElementById('rect-opac-cont').value)
+    // 2 = document.getElementById('rect-radio').value
+}
+
+function actualizarPropiedadesCirc(){
+    arreglo[capaSeleccionada].x = parseFloat(document.getElementById('ellipse-x').value)
+    arreglo[capaSeleccionada].y = parseFloat(document.getElementById('ellipse-y').value)
+    arreglo[capaSeleccionada].ancho = parseFloat(document.getElementById('ellipse-ancho').value)
+    arreglo[capaSeleccionada].alto = parseFloat(document.getElementById('ellipse-alto').value)
+    arreglo[capaSeleccionada].colorRelleno = document.getElementById('ellipse-color-relleno').value
+    arreglo[capaSeleccionada].opacRell = parseFloat(document.getElementById('ellipse-opac-rell').value)
+    arreglo[capaSeleccionada].colorContorno = document.getElementById('ellipse-color-contorno').value
+    arreglo[capaSeleccionada].grosorContorno = parseFloat(document.getElementById('ellipse-grosor-contorno').value)
+    arreglo[capaSeleccionada].opacCont = parseFloat(document.getElementById('ellipse-opac-cont').value)
+}
+
+function actualizarPropiedadesLinea(){
+    arreglo[capaSeleccionada].x1 = parseFloat(document.getElementById('line-x1').value)
+    arreglo[capaSeleccionada].y1 = parseFloat(document.getElementById('line-y1').value)
+    arreglo[capaSeleccionada].x2 = parseFloat(document.getElementById('line-x2').value)
+    arreglo[capaSeleccionada].y2 = parseFloat(document.getElementById('line-y2').value)
+    arreglo[capaSeleccionada].colorContorno = document.getElementById('line-color-contorno').value
+    arreglo[capaSeleccionada].grosorContorno = parseFloat(document.getElementById('line-grosor-contorno').value)
+    arreglo[capaSeleccionada].opacCont = parseFloat(document.getElementById('line-opac-cont').value)
+}
 
