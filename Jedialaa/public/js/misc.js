@@ -153,7 +153,7 @@ function mostrarPropiedadesRect() {
     document.getElementById('rect-color-contorno').value = arreglo[capaSeleccionada].colorContorno
     document.getElementById('rect-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
     document.getElementById('rect-opac-cont').value = arreglo[capaSeleccionada].opacCont
-    document.getElementById('rect-radio').value = 15
+    document.getElementById('rect-radio').value = arreglo[capaSeleccionada].radio
 }
 
 function mostrarPropiedadesCirc() {
@@ -223,7 +223,7 @@ function actualizarPropiedadesRect(){
     arreglo[capaSeleccionada].colorContorno = document.getElementById('rect-color-contorno').value
     arreglo[capaSeleccionada].grosorContorno = parseFloat(document.getElementById('rect-grosor-contorno').value)
     arreglo[capaSeleccionada].opacCont = parseFloat(document.getElementById('rect-opac-cont').value)
-    // 2 = document.getElementById('rect-radio').value
+    arreglo[capaSeleccionada].radio = document.getElementById('rect-radio').value
 }
 
 function actualizarPropiedadesCirc(){
@@ -249,8 +249,6 @@ function actualizarPropiedadesLinea(){
 }
 
 function actualizarPropiedadesTexto() {
-    document.getElementById('text-properties').style.display = "block"
-    
     arreglo[capaSeleccionada].contenido = document.getElementById('text-contenido').value
     arreglo[capaSeleccionada].x = parseFloat(document.getElementById('text-x').value)
     arreglo[capaSeleccionada].y = parseFloat(document.getElementById('text-y').value)

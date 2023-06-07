@@ -5,6 +5,7 @@ var opacRellDef
 var colorContornoDefault
 var opacContDef
 var grosorDefault
+var radioDef
 var tamanioTextoDefault
 
 var colorRellenoDefaultP5
@@ -32,6 +33,7 @@ function setup() {
     colorContornoDefault = "#000000"
     opacRellDef = 255
     opacContDef = 255
+    radioDef = 20
     tamanioTextoDefault = 25
 
 
@@ -71,7 +73,7 @@ function draw() {
             line(figura.x1, figura.y1, figura.x2, figura.y2)
         }
         else if (figura.tipo == "rect") {
-            rect(figura.x, figura.y, figura.ancho, figura.alto)
+            rect(figura.x, figura.y, figura.ancho, figura.alto, figura.radio)
         }
         else if (figura.tipo == "circ") {
             ellipse(figura.x, figura.y, figura.ancho, figura.alto)
@@ -90,7 +92,7 @@ function draw() {
     if(dibujando){
         if(clickEnCanvas){
             if(figuraSeleccionada == "rect"){
-                rect(mouseXInicial, mouseYInicial, mouseX-mouseXInicial, mouseY-mouseYInicial)
+                rect(mouseXInicial, mouseYInicial, mouseX-mouseXInicial, mouseY-mouseYInicial, radioDef)
             }
             else if(figuraSeleccionada == "linea"){
                 line(mouseXInicial, mouseYInicial, mouseX, mouseY)
@@ -212,6 +214,7 @@ function crearNuevaFigura() {
             "colorContorno": colorContornoDefault,
             "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
+            "radio": radioDef,
             "tipo": "rect"
         })
     }

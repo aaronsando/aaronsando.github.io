@@ -36,7 +36,7 @@
     </div>
     <br>
     <div class="input-group">
-        <span class="input-group-text">Radius-corner</span>
+        <span class="input-group-text">Corner Radius</span>
         <input id="rect-radio" onchange="actualizarPropiedades()" type="text" class="form-control">
     </div>
     <br>
