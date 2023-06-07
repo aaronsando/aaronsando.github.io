@@ -44,11 +44,16 @@ function actualizarPropiedades(){
     else if (arreglo[capaSeleccionada].tipo == "linea"){
         actualizarPropiedadesLinea()
     }
+
+    else if (arreglo[capaSeleccionada].tipo == "texto"){
+        actualizarPropiedadesTexto()
+    }
     actualizarArregloEnInput()
 }
 
 function selecBotonFigura( selected, btnid ){
     figuraSeleccionada = selected
+    // alert(figuraSeleccionada)
 
     var arrBtnsFiguras = document.getElementsByClassName('btn-figura')
     
@@ -75,17 +80,22 @@ function repintarBotonesCapas() {
         var tipoTemp = arreglo[index].tipo
         document.getElementById('listaCapas').insertAdjacentHTML('beforeend', `
             <div class="btn-capas row m-0 mb-2" style="height:35px">
-                <div class="col-8 p-0">
+                <div class="col-9 p-0">
                     <button onclick="resaltarCapa(`+index+`, '`+tipoTemp+`')" type="button" id="capa`+index+`" class="btn btn-light w-100 h-100 p-1 pl-2 text-start"> `+arreglo[index].nombre+` </button>
                 </div>
-                <div class="col-2 p-0">
+                <div class="col-1 p-0">
                     <button type="button" onclick="subirCapa(`+index+`)" class="btn btn-light w-100 h-100 p-0">
                         <img src="`+arrow_up_img+`" alt="Raise layer" width="20" height="20">
                     </button>
                 </div>
-                <div class="col-2 p-0">
+                <div class="col-1 p-0">
                     <button type="button" onclick="bajarCapa(`+index+`)" class="btn btn-light w-100 h-100 p-0">
                         <img src="`+arrow_down_img+`" alt="Lower layer" width="20" height="20">
+                    </button>
+                </div>
+                <div class="col-1 p-0">
+                    <button type="button" onclick="eliminarCapa(`+index+`)" class="btn btn-light w-100 h-100 p-0">
+                        <img src="`+trash_img+`" alt="Delete layer" width="16" height="16">
                     </button>
                 </div>
             </div>`);
@@ -101,6 +111,7 @@ function subirCapa( num ){
     arreglo[num] = arreglo[num+1]
     arreglo[num+1] = temp
 
+    actualizarArregloEnInput()
     repintarBotonesCapas();
     resaltarCapa(num+1, arreglo[num+1].tipo)
 }
@@ -114,9 +125,17 @@ function bajarCapa( num ){
     arreglo[num] = arreglo[num-1]
     arreglo[num-1] = temp
     
+    actualizarArregloEnInput()
     repintarBotonesCapas();
-
     resaltarCapa(num-1, arreglo[num-1].tipo);
+}
+
+function eliminarCapa( num ) {
+    // alert("Se seleccionno borrar la capa "+arreglo[num].nombre)
+    arreglo.splice(num, 1)
+
+    actualizarArregloEnInput()
+    repintarBotonesCapas()
 }
 
 function resaltarCapa(index, tipo) {
@@ -137,6 +156,11 @@ function resaltarCapa(index, tipo) {
     else if (arreglo[capaSeleccionada].tipo == "linea"){
         mostrarPropiedadesLinea()
     }
+
+    else if (arreglo[capaSeleccionada].tipo == "texto"){
+        mostrarPropiedadesTexto()
+    }
+
 }
 
 function mostrarPropiedadesRect() {
@@ -178,6 +202,16 @@ function mostrarPropiedadesLinea() {
     document.getElementById('line-color-contorno').value = arreglo[capaSeleccionada].colorContorno
     document.getElementById('line-grosor-contorno').value = arreglo[capaSeleccionada].grosorContorno
     document.getElementById('line-opac-cont').value = arreglo[capaSeleccionada].opacCont
+}
+
+function mostrarPropiedadesTexto() {
+    document.getElementById('text-properties').style.display = "block"
+    
+    document.getElementById('text-contenido').value = arreglo[capaSeleccionada].contenido
+    document.getElementById('text-x').value = arreglo[capaSeleccionada].x
+    document.getElementById('text-y').value = arreglo[capaSeleccionada].y
+    document.getElementById('text-tamanio').value = arreglo[capaSeleccionada].tamanio
+    document.getElementById('text-color').value = arreglo[capaSeleccionada].color
 }
 
 
@@ -234,5 +268,15 @@ function actualizarPropiedadesLinea(){
     arreglo[capaSeleccionada].colorContorno = document.getElementById('line-color-contorno').value
     arreglo[capaSeleccionada].grosorContorno = parseFloat(document.getElementById('line-grosor-contorno').value)
     arreglo[capaSeleccionada].opacCont = parseFloat(document.getElementById('line-opac-cont').value)
+}
+
+function actualizarPropiedadesTexto() {
+    document.getElementById('text-properties').style.display = "block"
+    
+    arreglo[capaSeleccionada].contenido = document.getElementById('text-contenido').value
+    arreglo[capaSeleccionada].x = parseFloat(document.getElementById('text-x').value)
+    arreglo[capaSeleccionada].y = parseFloat(document.getElementById('text-y').value)
+    arreglo[capaSeleccionada].tamanio = parseFloat(document.getElementById('text-tamanio').value)
+    arreglo[capaSeleccionada].color = document.getElementById('text-color').value
 }
 

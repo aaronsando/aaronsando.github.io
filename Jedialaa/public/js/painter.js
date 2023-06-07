@@ -5,6 +5,7 @@ var opacRellDef
 var colorContornoDefault
 var opacContDef
 var grosorDefault
+var tamanioTextoDefault
 
 var colorRellenoDefaultP5
 var colorContornoDefaultP5
@@ -31,6 +32,8 @@ function setup() {
     colorContornoDefault = "#000000"
     opacRellDef = 255
     opacContDef = 255
+    tamanioTextoDefault = 25
+
 
     colorRellenoDefaultP5 = color(colorRellenoDefault)
     colorContornoDefaultP5 = color(colorContornoDefault)
@@ -42,20 +45,28 @@ function setup() {
     fill(colorRellenoDefault)
     stroke(colorContornoDefault)
     strokeWeight(grosorDefault)
+
 }
 
 function draw() {
     background(235)
+    text("Hola", 50,50)
 
     arreglo.forEach(figura => {
-        colorFigP5 = color(figura.colorRelleno)
-        colorFigP5.setAlpha(figura.opacRell)
-        fill(colorFigP5)
-        
-        colorFigP5 = color(figura.colorContorno)
-        colorFigP5.setAlpha(figura.opacCont)
-        stroke(colorFigP5)
-        strokeWeight(figura.grosorContorno)
+        if(figura.tipo=="texto"){
+            fill(figura.color)
+            textSize(figura.tamanio)
+        }
+        else{
+            colorFigP5 = color(figura.colorRelleno)
+            colorFigP5.setAlpha(figura.opacRell)
+            fill(colorFigP5)
+            
+            colorFigP5 = color(figura.colorContorno)
+            colorFigP5.setAlpha(figura.opacCont)
+            stroke(colorFigP5)
+            strokeWeight(figura.grosorContorno)
+        }
 
         if (figura.tipo == "linea") {
             line(figura.x1, figura.y1, figura.x2, figura.y2)
@@ -66,11 +77,15 @@ function draw() {
         else if (figura.tipo == "circ") {
             ellipse(figura.x, figura.y, figura.ancho, figura.alto)
         }
+        else if (figura.tipo == "texto"){
+            text(figura.contenido, figura.x, figura.y)
+        }
     });
 
     fill(colorRellenoDefaultP5)
     stroke(colorContornoDefaultP5)
     strokeWeight(grosorDefault)
+    textSize(tamanioTextoDefault)
     
 
     if(dibujando){
@@ -123,16 +138,41 @@ function mouseReleased() {
         if(figuraSeleccionada == 'cursor'){
             clickEnFigura()
         }
+        else if(figuraSeleccionada == 'texto'){
+            crearTexto()
+        }
         else{
             crearNuevaFigura()
         }
     }
-
+    
     mouseXInicial = undefined
     mouseYInicial = undefined
 }
 
+function crearTexto() {
+    var textito = prompt("Write your text", "Your text here")
+    if(isBlank(textito)){
+        return
+    }
+    cantTexto++
+    arreglo.push({
+        "nombre": "Text "+cantTexto,
+        "contenido": textito,
+        "x": mouseXFinal,
+        "y": mouseYFinal,
+        "tamanio": tamanioTextoDefault,
+        "color": colorContornoDefault,
+        "tipo": "texto"
+    })
+    actualizarArregloEnInput()
+    repintarBotonesCapas()
+    resaltarCapa(arreglo.length-1, "texto")
+}
 
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
 
 function crearNuevaFigura() {
     var tipoTemp

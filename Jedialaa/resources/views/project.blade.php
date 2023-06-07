@@ -94,7 +94,7 @@
                     <img src="{{ asset('images/circle-w.png') }}" alt="Ellipse" width="32" height="32">
                 </button>
 
-                <button onclick="selecBotonFigura('text', 4) " id="fig4"
+                <button onclick="selecBotonFigura('texto', 4) " id="fig4"
                     class="btn btn-jedialaa btn-figura border border-0 p-2" style="margin-left: 0px">
                     <img src="{{ asset('images/text-w.png') }}" alt="Text" width="32" height="32">
                 </button>
@@ -123,12 +123,12 @@
 
     <div class="row m-0">
 
-        <div id="listaCapas" class="col-2" style="background-color:gray">
+        <div id="listaCapas" class="col-2 overflow-auto" style="background-color:gray; max-height: 850px">
             <h4 class="text-light mt-2 mb-3" style="text-align:center">Layers</h4>
         </div>
 
         <div id="canvasparent" class="col-8 p-0" style="min-height:300px">
-
+            
         </div>
 
         <div class="col-2" style="background-color:gray">
@@ -137,6 +137,7 @@
             @include('comp.rectProperties')
             @include('comp.ellipseProperties')
             @include('comp.lineProperties')
+            @include('comp.textProperties')
         </div>
 
     </div>
@@ -152,6 +153,7 @@
         
         var arrow_up_img = "{{ asset('images/arrow-up.png') }}"
         var arrow_down_img = "{{ asset('images/arrow-down.png') }}"
+        var trash_img = "{{ asset('images/bin.png') }}"
     </script>
 
     <script src="{{ asset('js/misc.js') }}"></script>
