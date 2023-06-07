@@ -21,7 +21,7 @@ use App\Http\Controllers\ProjectController;
 
 Route::get('/', function () {
     return view('landing');
-});
+})->name('landing');
 
 Route::get('/login', function () {
     return view('auth.login');
