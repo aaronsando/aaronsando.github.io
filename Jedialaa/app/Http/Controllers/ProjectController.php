@@ -29,7 +29,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $project = Project::create($request->all());
-        return redirect('/home');
+        $id = $project->id;
+        return redirect('/project/'.$id);
     }
 
     /**
