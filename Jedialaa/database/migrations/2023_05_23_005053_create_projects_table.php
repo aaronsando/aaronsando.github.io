@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
 
-            $table->integer('line_counter');
-            $table->integer('rect_counter');
-            $table->integer('ellipse_counter');
-            $table->integer('text_counter');
+            $table->integer('line_counter')->default(0);
+            $table->integer('rect_counter')->default(0);
+            $table->integer('ellipse_counter')->default(0);
+            $table->integer('text_counter')->default(0);
 
             $table->longText('figureArray')->nullable();
 
