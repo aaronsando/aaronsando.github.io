@@ -50,7 +50,6 @@ function setup() {
 
 function draw() {
     background(235)
-    text("Hola", 50,50)
 
     arreglo.forEach(figura => {
         if(figura.tipo=="texto"){
