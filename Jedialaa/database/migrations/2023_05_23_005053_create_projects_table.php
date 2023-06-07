@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
+            $table->integer('line_counter');
+            $table->integer('rect_counter');
+            $table->integer('ellipse_counter');
+            $table->integer('text_counter');
+
             $table->longText('figureArray')->nullable();
 
             $table->unsignedBigInteger('user_id');

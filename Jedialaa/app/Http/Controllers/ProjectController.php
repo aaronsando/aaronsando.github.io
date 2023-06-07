@@ -61,6 +61,12 @@ class ProjectController extends Controller
         // return $request;
         $project = Project::find($request->input('id'));
         $project->figureArray = $request->input('figureArray');
+
+        $project->line_counter = $request->input('line_counter');
+        $project->rect_counter = $request->input('rect_counter');
+        $project->ellipse_counter = $request->input('ellipse_counter');
+        $project->text_counter = $request->input('text_counter');
+        
         $project->save();
         return redirect('project/'.$request->input('id'));
     }

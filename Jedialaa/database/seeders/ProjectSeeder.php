@@ -14,8 +14,14 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         $project = new Project();
+
         $project-> name = "Proyecto prueba";
+        $project-> line_counter = 0;
+        $project-> rect_counter = 0;
+        $project-> text_counter = 0;
+        $project-> ellipse_counter = 0;
         $project-> user_id = 1;
+        
         $project->save();
     }
 }

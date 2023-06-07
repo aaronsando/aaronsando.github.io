@@ -111,6 +111,12 @@
                 @method('put')
                 <input type="hidden" name="id" value="{{ $proj->id }}">
                 <input type="hidden" name="figureArray" id="txtFigureArray">
+
+                <input type="hidden" name="line_counter" id="line_counter">
+                <input type="hidden" name="rect_counter" id="rect_counter">
+                <input type="hidden" name="ellipse_counter" id="ellipse_counter">
+                <input type="hidden" name="text_counter" id="text_counter">
+
                 <h5 class="m-0 text-light">
                     {{ $proj->name }}
                     <button class="btn btn-jedialaa border border-0 p-2" style="margin-left: 20px;">
@@ -150,7 +156,16 @@
         @else
             var arreglo = []
         @endif
-        
+
+        var cantLinea = {{ $proj->line_counter }};
+        var cantRect = {{ $proj->rect_counter }};
+        var cantCirc = {{ $proj->ellipse_counter }};
+        var cantTexto = {{ $proj->text_counter }};
+        // var cantLinea = 0;
+        // var cantRect = 0;
+        // var cantCirc = 0;
+        // var cantTexto = 0;
+
         var arrow_up_img = "{{ asset('images/arrow-up.png') }}"
         var arrow_down_img = "{{ asset('images/arrow-down.png') }}"
         var trash_img = "{{ asset('images/bin.png') }}"

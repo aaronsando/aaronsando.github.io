@@ -165,6 +165,7 @@ function crearTexto() {
         "tipo": "texto"
     })
     actualizarArregloEnInput()
+    actualizarContadorFiguras()
     repintarBotonesCapas()
     resaltarCapa(arreglo.length-1, "texto")
 }
@@ -233,6 +234,8 @@ function crearNuevaFigura() {
     }
 
     actualizarArregloEnInput()
+
+    actualizarContadorFiguras()
 
     repintarBotonesCapas()
 
