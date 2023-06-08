@@ -57,6 +57,7 @@ function draw() {
         if(figura.tipo=="texto"){
             fill(figura.color)
             textSize(figura.tamanio)
+            noStroke()
         }
         else{
             colorFigP5 = color(figura.colorRelleno)
@@ -275,6 +276,12 @@ function clickEnFigura() {
                 return
             }
         }
+        else if(arreglo[index].tipo == "texto"){
+            if(clickEnTexto(index)){
+                resaltarCapa(index, "texto")
+                return
+            }
+        }
     }
     quitarActivoEnCapas()
 }
@@ -293,6 +300,23 @@ function clickEnRect(index) {
     }
     return false
 }
+
+function clickEnTexto(index) {
+    if(arreglo[index].visible == false){
+        return false
+    }
+    
+    if(
+        (mouseXFinal >= arreglo[index].x) &&
+        (mouseXFinal <= arreglo[index].x+textWidth(arreglo[index].contenido)) &&
+        (mouseYFinal >= arreglo[index].y-textAscent()) &&
+        (mouseYFinal <= arreglo[index].y)
+    ){
+        return true
+    }
+    return false
+}
+
 function clickEnCirc(index) {
     if(arreglo[index].visible == false){
         return false
