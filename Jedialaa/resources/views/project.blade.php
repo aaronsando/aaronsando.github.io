@@ -166,6 +166,8 @@
         // var cantCirc = 0;
         // var cantTexto = 0;
 
+        var visible_img = "{{ asset('images/visible.png') }}"
+        var invisible_img = "{{ asset('images/invisible-w.png') }}"
         var arrow_up_img = "{{ asset('images/arrow-up.png') }}"
         var arrow_down_img = "{{ asset('images/arrow-down.png') }}"
         var trash_img = "{{ asset('images/bin.png') }}"

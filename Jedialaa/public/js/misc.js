@@ -4,6 +4,18 @@ repintarBotonesCapas()
 
 var capaSeleccionada
 
+function cambiarVisibilidad( index ) {
+
+    // if(arreglo[index].visible){
+    //     console.log("Cambiar a falso");
+    // }
+    arreglo[index].visible ? arreglo[index].visible=false : arreglo[index].visible=true
+
+    actualizarArregloEnInput()
+    repintarBotonesCapas()
+    resaltarCapa(index, arreglo[index].tipo)
+}
+
 function actualizarContadorFiguras() {
     document.getElementById('line_counter').value = cantLinea
     document.getElementById('rect_counter').value = cantRect
@@ -55,11 +67,27 @@ function repintarBotonesCapas() {
     }
     //Crear
     for (let index = arreglo.length-1; index >= 0; index--) {
+
         var tipoTemp = arreglo[index].tipo
+        
+        var visibilidad = visible_img
+        var claseBtnVisib = "btn-light"
+
+        if(arreglo[index].visible == false){
+            visibilidad = invisible_img
+            claseBtnVisib = "btn-secondary"
+        }
+
+        // arreglo[index].visible ? visibilidad = visible_img : visibilidad = invisible_img
         document.getElementById('listaCapas').insertAdjacentHTML('beforeend', `
             <div class="btn-capas row m-0 mb-2" style="height:35px">
-                <div class="col-9 p-0">
+                <div class="col-8 p-0">
                     <button onclick="resaltarCapa(`+index+`, '`+tipoTemp+`')" type="button" id="capa`+index+`" class="btn btn-light w-100 h-100 p-1 pl-2 text-start"> `+arreglo[index].nombre+` </button>
+                </div>
+                <div class="col-1 p-0">
+                    <button type="button" onclick="cambiarVisibilidad(`+index+`)" class="btn `+claseBtnVisib+` w-100 h-100 p-0">
+                        <img src="`+visibilidad+`" alt="Visibility" width="20" height="20">
+                    </button>
                 </div>
                 <div class="col-1 p-0">
                     <button type="button" onclick="subirCapa(`+index+`)" class="btn btn-light w-100 h-100 p-0">
@@ -192,7 +220,6 @@ function mostrarPropiedadesTexto() {
     document.getElementById('text-color').value = arreglo[capaSeleccionada].color
 }
 
-
 function quitarActivoEnCapas(){
     var arrBtnsCapasActivos = document.getElementsByClassName('btn-capa-active')
     for (let index = 0; index < arrBtnsCapasActivos.length; index++) {
@@ -207,11 +234,9 @@ function quitarActivoEnCapas(){
     }
 }
 
-
 function actualizarArregloEnInput(){
     document.getElementById('txtFigureArray').value = JSON.stringify(arreglo)
 }
-
 
 function actualizarPropiedadesRect(){
     arreglo[capaSeleccionada].x = parseFloat(document.getElementById('rect-x').value)

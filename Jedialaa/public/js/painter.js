@@ -69,17 +69,19 @@ function draw() {
             strokeWeight(figura.grosorContorno)
         }
 
-        if (figura.tipo == "linea") {
-            line(figura.x1, figura.y1, figura.x2, figura.y2)
-        }
-        else if (figura.tipo == "rect") {
-            rect(figura.x, figura.y, figura.ancho, figura.alto, figura.radio)
-        }
-        else if (figura.tipo == "circ") {
-            ellipse(figura.x, figura.y, figura.ancho, figura.alto)
-        }
-        else if (figura.tipo == "texto"){
-            text(figura.contenido, figura.x, figura.y)
+        if(figura.visible){
+            if (figura.tipo == "linea") {
+                line(figura.x1, figura.y1, figura.x2, figura.y2)
+            }
+            else if (figura.tipo == "rect") {
+                rect(figura.x, figura.y, figura.ancho, figura.alto, figura.radio)
+            }
+            else if (figura.tipo == "circ") {
+                ellipse(figura.x, figura.y, figura.ancho, figura.alto)
+            }
+            else if (figura.tipo == "texto"){
+                text(figura.contenido, figura.x, figura.y)
+            }
         }
     });
 
@@ -164,7 +166,8 @@ function crearTexto() {
         "y": mouseYFinal,
         "tamanio": tamanioTextoDefault,
         "color": colorContornoDefault,
-        "tipo": "texto"
+        "tipo": "texto",
+        "visible": true
     })
     actualizarArregloEnInput()
     actualizarContadorFiguras()
@@ -192,7 +195,8 @@ function crearNuevaFigura() {
             "colorContorno": colorContornoDefault,
             "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
-            "tipo": "linea"
+            "tipo": "linea",
+            "visible": true
         })
     }
     else if (figuraSeleccionada == 'rect') {
@@ -215,7 +219,8 @@ function crearNuevaFigura() {
             "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
             "radio": radioDef,
-            "tipo": "rect"
+            "tipo": "rect",
+            "visible": true
         })
     }
     else if (figuraSeleccionada == 'circ') {
@@ -232,7 +237,8 @@ function crearNuevaFigura() {
             "colorContorno": colorContornoDefault,
             "opacCont": opacContDef,
             "grosorContorno": grosorDefault,
-            "tipo": "circ"
+            "tipo": "circ",
+            "visible": true
         })
     }
 
@@ -274,6 +280,9 @@ function clickEnFigura() {
 }
 
 function clickEnRect(index) {
+    if(arreglo[index].visible == false){
+        return false
+    }
     if(
         (mouseXFinal >= (arreglo[index].x - arreglo[index].grosorContorno)) && 
         (mouseXFinal <= (arreglo[index].x + arreglo[index].ancho + arreglo[index].grosorContorno)) &&
@@ -285,6 +294,10 @@ function clickEnRect(index) {
     return false
 }
 function clickEnCirc(index) {
+    if(arreglo[index].visible == false){
+        return false
+    }
+
     var distance = Math.pow(mouseXFinal - arreglo[index].x, 2) / Math.pow((arreglo[index].ancho/2 + arreglo[index].grosorContorno/2), 2) + Math.pow(mouseYFinal - arreglo[index].y, 2) / Math.pow((arreglo[index].alto/2 + arreglo[index].grosorContorno/2), 2)
     if(distance < 1){
         return true 
@@ -292,6 +305,10 @@ function clickEnCirc(index) {
     return false
 }
 function clickEnLinea(index) {
+    if(arreglo[index].visible == false){
+        return false
+    }
+
     var tolerance = 4;
     var m = (arreglo[index].y1 - arreglo[index].y2) / (arreglo[index].x1 - arreglo[index].x2);
     var b = arreglo[index].y1 - (m * arreglo[index].x1);
@@ -309,3 +326,4 @@ function clickEnLinea(index) {
     } 
     return false
 }
+
