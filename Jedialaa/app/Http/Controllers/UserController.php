@@ -38,7 +38,10 @@ class UserController extends Controller
      */
     public function show()
     {
-        $user = User::with('projects')->find(Auth()->User()->id);
+        // $user = User::with('projects')->find(Auth()->User()->id);
+        $user = User::with(['projects' => function ($q) {
+            $q->orderBy('updated_at', 'desc');
+        }])->find(Auth()->User()->id);
         return view('home2', ['user' => $user]);
     }
 

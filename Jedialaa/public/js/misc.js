@@ -5,10 +5,6 @@ repintarBotonesCapas()
 var capaSeleccionada
 
 function cambiarVisibilidad( index ) {
-
-    // if(arreglo[index].visible){
-    //     console.log("Cambiar a falso");
-    // }
     arreglo[index].visible ? arreglo[index].visible=false : arreglo[index].visible=true
 
     actualizarArregloEnInput()
@@ -16,11 +12,24 @@ function cambiarVisibilidad( index ) {
     resaltarCapa(index, arreglo[index].tipo)
 }
 
+
+function guardar(){
+    actualizarContadorFiguras()
+    actualizarArregloEnInput()
+    actualizarDataURL()
+    document.getElementById('formGuardarProyecto').submit()
+}
+
 function actualizarContadorFiguras() {
     document.getElementById('line_counter').value = cantLinea
     document.getElementById('rect_counter').value = cantRect
     document.getElementById('ellipse_counter').value = cantCirc
     document.getElementById('text_counter').value = cantTexto
+}
+
+function actualizarDataURL() {
+    document.getElementById('imgDataURL').value = myCanvas.elt.toDataURL("image/jpeg", 0.5)
+    console.log("Se actualizo el dataurl");
 }
 
 function actualizarPropiedades(){
@@ -43,7 +52,6 @@ function actualizarPropiedades(){
 
 function selecBotonFigura( selected, btnid ){
     figuraSeleccionada = selected
-    // alert(figuraSeleccionada)
 
     var arrBtnsFiguras = document.getElementsByClassName('btn-figura')
     
@@ -137,7 +145,6 @@ function bajarCapa( num ){
 }
 
 function eliminarCapa( num ) {
-    // alert("Se seleccionno borrar la capa "+arreglo[num].nombre)
     arreglo.splice(num, 1)
 
     actualizarArregloEnInput()

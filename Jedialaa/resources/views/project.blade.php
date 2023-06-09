@@ -106,11 +106,12 @@
 
 
 
-            <form action="{{ url('/project/'.$proj->id) }}" method="POST">
+            <form id="formGuardarProyecto" action="{{ url('/project/'.$proj->id) }}" method="POST">
                 @csrf
                 @method('put')
                 <input type="hidden" name="id" value="{{ $proj->id }}">
                 <input type="hidden" name="figureArray" id="txtFigureArray">
+                <input type="hidden" name="imgDataURL" id="imgDataURL">
 
                 <input type="hidden" name="line_counter" id="line_counter">
                 <input type="hidden" name="rect_counter" id="rect_counter">
@@ -119,7 +120,7 @@
 
                 <h5 class="m-0 text-light">
                     {{ $proj->name }}
-                    <button class="btn btn-jedialaa border border-0 p-2" style="margin-left: 20px;">
+                    <button onclick="guardar()" type="button" class="btn btn-jedialaa border border-0 p-2" style="margin-left: 20px;">
                         <img src="{{ asset('images/save-w.png') }}" alt="Save" width="32" height="32">
                     </button>
             </form>

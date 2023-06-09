@@ -20,12 +20,14 @@ return new class extends Migration
             $table->integer('ellipse_counter')->default(0);
             $table->integer('text_counter')->default(0);
 
+            $table->text('imgDataURL')->nullable();
             $table->longText('figureArray')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             
             $table->timestamps();
+
         });
     }
 

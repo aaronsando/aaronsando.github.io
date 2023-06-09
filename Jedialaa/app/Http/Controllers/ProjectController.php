@@ -61,6 +61,7 @@ class ProjectController extends Controller
         // return $request;
         $project = Project::find($request->input('id'));
         $project->figureArray = $request->input('figureArray');
+        $project->imgDataURL = $request->input('imgDataURL');
 
         $project->line_counter = $request->input('line_counter');
         $project->rect_counter = $request->input('rect_counter');

@@ -23,6 +23,8 @@ var mouseYFinal
 var canvasWidth
 var canvasHeight = 850;
 
+var myCanvas
+
 
 function setup() {
     var canvasDiv = document.getElementById("canvasparent");
@@ -33,16 +35,16 @@ function setup() {
     colorContornoDefault = "#000000"
     opacRellDef = 255
     opacContDef = 255
-    radioDef = 20
+    radioDef = 0
     tamanioTextoDefault = 25
 
 
     colorRellenoDefaultP5 = color(colorRellenoDefault)
     colorContornoDefaultP5 = color(colorContornoDefault)
 
-    var canvas = createCanvas(canvasWidth, canvasHeight)
-    canvas.parent("canvasparent")
-    canvas.mousePressed(presionado);
+    myCanvas = createCanvas(canvasWidth, canvasHeight)
+    myCanvas.parent("canvasparent")
+    myCanvas.mousePressed(presionado);
 
     fill(colorRellenoDefault)
     stroke(colorContornoDefault)
@@ -85,6 +87,7 @@ function draw() {
             }
         }
     });
+
 
     fill(colorRellenoDefaultP5)
     stroke(colorContornoDefaultP5)
